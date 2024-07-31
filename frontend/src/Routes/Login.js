@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Input from '../Component/Input'
 import Password from '../Component/Password'
 import { makeUnauthenticatedPOSTRequest } from '../Utils/endPointCalling';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {useCookies} from 'react-cookie';
 
 function Login() {
@@ -39,7 +39,7 @@ function Login() {
                 e.preventDefault();
                 loginFunc();
             }} style={{backgroundColor: '#F2613F'}} className='w-[40%] h-[3vmax] rounded-[0.5vmax] my-[0.5vmax] text-[1.1vmax] font-bold'> Login </button>
-            <div className='text-[1.1vmax]'> Don't Have an Account?.. <span className='font-bold cursor-pointer'>Sign Up</span> </div>
+            <div className='text-[1.1vmax]'> Don't Have an Account?.. <Link to='/signup'><span className='font-bold cursor-pointer'>Sign Up</span></Link> </div>
         </div>
         </div>
     </div>

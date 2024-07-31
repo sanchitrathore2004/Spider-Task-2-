@@ -2,10 +2,17 @@ import React, { useContext } from 'react'
 import LoggedinUi from '../Component/LoggedinUi'
 import userContext from '../Context/Context';
 import { Link, useNavigate } from 'react-router-dom';
+import {useCookies} from 'react-cookie';
 
 function Profile() {
     const {profileInfo, setProfileInfo, profilePhoto, setProfilePhoto} = useContext(userContext);
     const navigate = useNavigate();
+    const [cookie, setCookie] = useCookies(['token']);
+
+    const logout = async () => {
+      setCookie('token', '', {path: '/'});
+    }
+
   return (
     <LoggedinUi>
         <div className='w-full h-full flex flex-col justify-start items-center'>
@@ -22,7 +29,10 @@ function Profile() {
             }} style={{backgroundColor: '#F2613F'}} className='btn w-[9vmax] p-[0.5vmax] rounded-[0.5vmax] text-[1.1vmax] text-white font-bold'>Edit Details</button><button onClick={(e)=>{
                 e.preventDefault();
                 navigate('/edit/password');
-              }} style={{backgroundColor: '#F2613F'}} className='btn w-[9vmax] p-[0.5vmax] rounded-[0.5vmax] text-[1.1vmax] text-white font-bold'>Edit Password</button></div>
+              }} style={{backgroundColor: '#F2613F'}} className='btn w-[9vmax] p-[0.5vmax] rounded-[0.5vmax] text-[1.1vmax] text-white font-bold'>Edit Password</button><button onClick={(e)=>{
+                e.preventDefault();
+                logout();
+              }} style={{backgroundColor: '#F2613F'}} className='btn w-[9vmax] p-[0.5vmax] rounded-[0.5vmax] text-[1.1vmax] text-white font-bold'>Logout</button></div>
         </div>
     </div>
     </LoggedinUi>

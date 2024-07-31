@@ -30,4 +30,7 @@
     .navBtn{
         display: block;
     }
+    .signup{
+        height: 50vmax;
+    }
 }
