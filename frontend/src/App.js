@@ -13,6 +13,9 @@ import ProfileEdit from './Routes/ProfileEdit';
 import EditPassword from './Routes/EditPassword';
 import CreateBook from './Routes/CreateBook';
 import Saved from './Routes/Saved';
+import Purchase from './Routes/Purchase';
+import PurchasedBooks from './Routes/PurchasedBooks';
+import MyBooks from './Routes/MyBooks';
 
 function App() {
   const [cookie, setCookie] = useCookies(['token']);
@@ -20,9 +23,11 @@ function App() {
   const [bookInfo, setBookInfo] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [bookType, setBookType] = useState('');
+  const [profilePhoto, setProfilePhoto] = useState('');
+  const [optionModal, setOptionModal] = useState(false);
   return (
     <BrowserRouter>
-    <userContext.Provider value={{profileInfo, setProfileInfo, bookInfo, setBookInfo, showModal, setShowModal, bookType, setBookType}}>
+    <userContext.Provider value={{profileInfo, setProfileInfo, bookInfo, setBookInfo, showModal, setShowModal, bookType, setBookType, profilePhoto, setProfilePhoto, optionModal, setOptionModal}}>
     {cookie.token ? (
       <Routes>
       <Route path='/home' element={ <LoggedinHome /> } />
@@ -32,6 +37,9 @@ function App() {
       <Route path='/edit/password' element={ <EditPassword /> } />
       <Route path='/create/book' element={ <CreateBook /> } />
       <Route path='/saved' element={ <Saved /> } />
+      <Route path='/purchase' element={ <Purchase /> } />
+      <Route path='/purchased/books' element={ <PurchasedBooks /> } />
+      <Route path='/mybooks' element={ <MyBooks /> } />
     </Routes>
     ):(
       <Routes>

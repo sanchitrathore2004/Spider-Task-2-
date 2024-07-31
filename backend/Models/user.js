@@ -28,6 +28,13 @@ const User = new mongoose.Schema({
         type: Buffer,
         required: false,
     },
+    purchases: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'bookModel',
+    }],
+    purchasesApi: [{
+        type: String,
+    }],
 });
 
 const userModel = mongoose.model('User', User);

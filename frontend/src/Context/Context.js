@@ -9,6 +9,10 @@ const userContext = createContext({
     setShowModal: (showModal)=> {},
     bookType: null,
     setBookType: (bookType)=>{},
+    profilePhoto: null,
+    setProfilePhoto: (profilePhoto)=>{},
+    optionModal: null,
+    setOptionModal: (optionModal)=>{},
 });
 
 export default userContext;

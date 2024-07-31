@@ -19,3 +19,15 @@
     padding: 0.5vmax;
     border-radius: 0.5vmax;
 }
+.navBtn{
+    display: none;
+}
+
+@media (max-width: 676px) {
+    .navigation{
+        display: none;
+    }
+    .navBtn{
+        display: block;
+    }
+}

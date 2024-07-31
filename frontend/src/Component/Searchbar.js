@@ -9,7 +9,7 @@ function Searchbar({label, placeholder, value, setValue}) {
             <div>
             <input onChange={(e)=>{
               setValue(e.target.value);
-            }} className='rounded-[0.2vmax] text-[1.1vmax] text-black w-[35vmax] h-[3vmax] p-[1vmax]' placeholder={placeholder} type='text'></input></div>
+            }} className='rounded-[0.2vmax] text-[1.1vmax] text-black w-[30vmax] h-[3vmax] p-[1vmax]' placeholder={placeholder} type='text'></input></div>
         </form>
     </div>
   )

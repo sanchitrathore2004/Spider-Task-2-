@@ -29,7 +29,7 @@ function Saved() {
         <div className='w-full h-[15%] flex justify-center items-center text-white text-[2.5vmax] font-bold'>
                 SAVED BOOKS
             </div>
-            <div className='w-full flex justify-center items-center'>
+            <div className='w-full flex justify-center flex-wrap items-center'>
                 {book.length>0 && book.map((item)=>{
                     return <BookCardDB info={item} />
                 })}

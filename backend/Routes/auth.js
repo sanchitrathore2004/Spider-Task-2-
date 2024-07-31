@@ -7,10 +7,6 @@ const passport = require('passport');
 const bcryptjs = require('bcryptjs');
 
 const multer = require('multer');
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
-
 
 router.post('/register', async function (req,res) {
     const {name, email, userName, password} = req.body;
@@ -97,32 +93,52 @@ router.post('/change/password', passport.authenticate('jwt', {session: false}), 
 
 });
 
-router.post('/upload/profile/photo', passport.authenticate('jwt', { session: false }), upload.single('profilePhoto'), async function (req, res) {
+const storage = multer.memoryStorage(); // Use memoryStorage to get the file as a buffer
+const upload = multer({ storage: storage });
+
+
+router.post('/edit/profile-photo', passport.authenticate('jwt', { session: false }), upload.single('profilePhoto'), async (req, res) => {
   try {
-    console.log('File:', req.file); // Log file info
+      if (!req.file) {
+        console.log('file not found');
+          return res.status(400).json({ message: 'No file uploaded' });
+      }
 
-    const userId = req.user._id;
-    const user = await userModel.findOne({ _id: userId });
+      console.log(req.file);
 
-    if (!user) {
-      return res.status(404).json({ err: 'User not found' });
-    }
+      const user = await userModel.findOne({ _id: req.user._id });
+      if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+      }
 
-    if (!req.file) {
-      return res.status(400).json({ err: 'No file uploaded' });
-    }
+      user.profilePhoto = req.file.buffer; // Save the file buffer in the user document
+      await user.save();
 
-    // Set the profile photo as a buffer
-    user.profilePhoto = req.file.buffer;
-    await user.save();
-
-    res.status(200).json({ message: 'Profile photo updated successfully', user });
+      res.status(200).json({ user });
   } catch (error) {
-    console.error('Error uploading profile photo:', error);
-    res.status(500).json({ message: 'Internal server error' });
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
   }
 });
 
+router.get('/profile-photo', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  try {
+      const user = await userModel.findOne({ _id: req.user._id });
+      if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+      }
+
+      if (!user.profilePhoto) {
+          return res.status(404).json({ message: 'Profile photo not found' });
+      }
+
+      res.set('Content-Type', 'image/jpeg'); // Adjust content type if needed
+      res.send(user.profilePhoto);
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 const jwt = require('jsonwebtoken');
 

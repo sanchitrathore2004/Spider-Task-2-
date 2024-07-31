@@ -3,7 +3,7 @@ import userContext from '../Context/Context';
 
 function BookCardDB({ info }) {
   const {bookInfo, setBookInfo, showModal, setShowModal, bookType, setBookType} = useContext(userContext);
-//   const thumbnail = info.volumeInfo.imageLinks?.thumbnail || 'https://st3.depositphotos.com/17828278/33150/v/450/depositphotos_331503262-stock-illustration-no-image-vector-symbol-missing.jpg';
+  // const thumbnail = info.coverImage ? info.cover || 'https://st3.depositphotos.com/17828278/33150/v/450/depositphotos_331503262-stock-illustration-no-image-vector-symbol-missing.jpg';
 
   return (
     <div onClick={(e)=>{
