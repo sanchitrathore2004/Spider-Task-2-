@@ -1,0 +1,1 @@
+export const siteUrl = 'http://localhost:8080';

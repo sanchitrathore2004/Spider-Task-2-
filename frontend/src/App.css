@@ -1,0 +1,21 @@
+.bookcard{
+    transition: width 0.5s, height 0.5s ease;
+}
+.bookcard:hover{
+    width: 22vmax;
+    height: 32vmax;
+}
+.btn{
+    transition: width 0.5s ease;
+}
+.btn:hover{
+    width: 10vmax;
+}
+.btnnav{
+    transition: background-color 0.5s, padding 0.5s, border-radius 0.5s ease;
+}
+.btnnav:hover{
+    background-color: #9B3922;
+    padding: 0.5vmax;
+    border-radius: 0.5vmax;
+}
